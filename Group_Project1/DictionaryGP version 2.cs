@@ -103,10 +103,10 @@ class Program
 		// each key is a category, and its value is a List of strings.
 		// add more values to a key later (Task 1.5).
 		// NOTE: Replace these sample entries with .
-		dictionary["test1"] = new List<string> { "x", "x" };
-		dictionary["test2"] = new List<string> { "x", "x" };
-		dictionary["test3"] = new List<string> { "x", "x" };		
-        dictionary["test4"] = new List<string> { "x", "x" };
+		dictionary["Network Scanners"] = new List<string> { "Nmap", "Wireshark", "Angry IP Scanner" };
+		dictionary["Vulnerability Scanners"] = new List<string> { "Nessus", "OpenVAS", "Qualys" };
+		dictionary["Password Crackers"] = new List<string> { "John the Ripper", "Hashcat", "Hydra" };
+		dictionary["Exploitation Frameworks"] = new List<string> { "Metasploit", "Cobalt Strike", "BeEF" };
 
 		// Confirm to the user how many keys were added.
 		Console.WriteLine("Dictionary populated with " + dictionary.Count + " keys.");
