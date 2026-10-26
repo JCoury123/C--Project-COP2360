@@ -137,7 +137,17 @@ class Program
     // Option 3: Ask the user for a key and remove it.
     static void RemoveEntry()
     {
-        Console.WriteLine("Remove feature coming soon.");
+        Console.Write("Enter the key you want to remove: ");
+    string key = Console.ReadLine() ?? "";
+
+    if (dictionary.ContainsKey(key))
+    {
+        dictionary.Remove(key);
+        Console.WriteLine($"The key '{key}' has been successfully removed.");
+    }
+    else
+    {
+        Console.WriteLine($"The key '{key}' was not found in the dictionary.");
     }
 
     // Option 4: Ask for a new key and its starting value.
