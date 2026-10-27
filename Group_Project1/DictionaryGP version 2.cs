@@ -134,22 +134,28 @@ class Program
 		}
     }
 
-    // Option 3: Ask the user for a key and remove it.
-    static void RemoveEntry()
-    {
-        Console.Write("Enter the key you want to remove: ");
-    string key = Console.ReadLine() ?? "";
+	// Option 3: Ask the user for a key and remove it.
+	static void RemoveEntry()
+	{
+    	// Prompt the user for the specific category/key they want to delete.
+    	Console.Write("Enter the key you want to remove: ");
+    
+    	// Read the input, using ?? "" to ensure we don't pass a null value.
+    	string key = Console.ReadLine() ?? "";
 
-    if (dictionary.ContainsKey(key))
-    {
-        dictionary.Remove(key);
-        Console.WriteLine($"The key '{key}' has been successfully removed.");
-    }
-    else
-    {
-        Console.WriteLine($"The key '{key}' was not found in the dictionary.");
-    }
-
+    	// Check if the dictionary actually contains the key before trying to remove it.
+    	if (dictionary.ContainsKey(key))
+    	{
+        	// Remove the key and its entire list of associated values.
+        	dictionary.Remove(key);
+        	Console.WriteLine($"The key '{key}' has been successfully removed.");
+    	}
+    	else
+    	{
+        	// If the key doesn't exist, let the user know instead of crashing.
+        	Console.WriteLine($"The key '{key}' was not found in the dictionary.");
+    	}
+	}
     // Option 4: Ask for a new key and its starting value.
     static void AddEntry()
     {
