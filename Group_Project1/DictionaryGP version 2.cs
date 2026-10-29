@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 class Program
 {
@@ -142,7 +143,7 @@ class Program
     
     	// Read the input, using ?? "" to ensure we don't pass a null value.
     	string key = Console.ReadLine() ?? "";
-
+    
     	// Check if the dictionary actually contains the key before trying to remove it.
     	if (dictionary.ContainsKey(key))
     	{
@@ -156,6 +157,7 @@ class Program
         	Console.WriteLine($"The key '{key}' was not found in the dictionary.");
     	}
 	}
+
     // Option 4: Ask for a new key and its starting value.
     static void AddEntry()
     {
@@ -191,12 +193,40 @@ class Program
     // Option 5: Append a value to an existing key's list.
     static void AppendValue()
     {
-        Console.WriteLine("Append feature coming soon.");
+        Console.Write("Enter the key you want to add a value to: ");
+        string key = Console.ReadLine() ?? "";
+
+        if (!dictionary.TryGetValue(key, out List<string> values))
+        {
+            Console.WriteLine($"The key '{key}' was not found in the dictionary.");
+            return;
+        }
+
+        Console.Write("Enter the value you want to add: ");
+        string value = Console.ReadLine() ?? "";
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            Console.WriteLine("Value cannot be empty.");
+            return;
+        }
+
+        values.Add(value);
+        Console.WriteLine($"The value '{value}' was added to '{key}'.");
     }
 
     // Option 6: Sort and display the dictionary keys.
     static void SortDictionary()
     {
-        Console.WriteLine("Sort feature coming soon.");
+        if (dictionary.Count == 0)
+        {
+            Console.WriteLine("The dictionary is empty. Use option 1 to populate it.");
+            return;
+        }
+
+        Console.WriteLine("\n--- Dictionary Contents (Sorted by Key) ---");
+        foreach (KeyValuePair<string, List<string>> pair in dictionary.OrderBy(item => item.Key))
+        {
+            Console.WriteLine(pair.Key + ": " + string.Join(", ", pair.Value));
+        }
     }
 }
