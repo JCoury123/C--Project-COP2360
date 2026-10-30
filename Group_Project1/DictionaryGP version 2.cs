@@ -193,15 +193,21 @@ class Program
     // Option 5: Append a value to an existing key's list.
     static void AppendValue()
     {
+        // Ask the user which dictionary key they want to update.
+        // This key should already exist in the dictionary.
         Console.Write("Enter the key you want to add a value to: ");
         string key = Console.ReadLine() ?? "";
 
+        // TryGetValue checks whether the key exists and gives us
+        // the associated List<string> if it does. If not, we show a message.
         if (!dictionary.TryGetValue(key, out List<string> values))
         {
             Console.WriteLine($"The key '{key}' was not found in the dictionary.");
             return;
         }
 
+        // Ask the user for the new item to add to the current list.
+        // A blank value is not allowed because it would create empty entries.
         Console.Write("Enter the value you want to add: ");
         string value = Console.ReadLine() ?? "";
         if (string.IsNullOrWhiteSpace(value))
@@ -210,6 +216,8 @@ class Program
             return;
         }
 
+        // Add the new value to the existing list for that key.
+        // This keeps the dictionary key and adds another item to its collection.
         values.Add(value);
         Console.WriteLine($"The value '{value}' was added to '{key}'.");
     }
@@ -217,15 +225,21 @@ class Program
     // Option 6: Sort and display the dictionary keys.
     static void SortDictionary()
     {
+        // If nothing has been added yet, tell the user instead of
+        // trying to sort an empty dictionary.
         if (dictionary.Count == 0)
         {
             Console.WriteLine("The dictionary is empty. Use option 1 to populate it.");
             return;
         }
 
+        // OrderBy(item => item.Key) sorts the dictionary by each key name.
+        // This organizes the output alphabetically instead of by insertion order.
         Console.WriteLine("\n--- Dictionary Contents (Sorted by Key) ---");
         foreach (KeyValuePair<string, List<string>> pair in dictionary.OrderBy(item => item.Key))
         {
+            // Print each key and its values in sorted order.
+            // string.Join arranges the list items into a readable comma-separated line.
             Console.WriteLine(pair.Key + ": " + string.Join(", ", pair.Value));
         }
     }
